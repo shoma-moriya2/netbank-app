@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>新規登録｜入力画面</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p th:text="${errMsg}"></p>
+		
+		<p>登録情報を入力してください。（ブラウザの戻る、再読み込みボタンの利用はお控えください）</p>
+		
+		<form th:action="@{/register/input}" th:object="${registration}" method="post">
+			
+			
+			<label>ユーザー名：</label>
+			<input type="text" th:field="*{account.username}"/><small>*任意の半角英数字</small><br><p th:errors="*{account.username}"/>
+			
+			<label>パスワード：</label>
+			<input type="password" th:field="*{account.password}" /><small>*数字・小文字・大文字を含む半角英数字３文字以上</small><br><p th:errors="*{account.password}"/>
+			
+			<label>郵便番号：</label>
+			<input type="text" th:field="*{profile.zipcode}" data-zipcode placeholder="1000001"><button type="button" data-search-btn>住所を検索</button><br><p th:errors="*{profile.zipcode}"/>
+			
+			
+			<label>住所：</label>
+			<input type="text" th:field="*{profile.address}" data-address><br><p th:errors="*{profile.address}"/>
+
+			<label>丁・番地・号以下：</label>
+			<input type="text" th:field="*{profile.chou}" placeholder="1-1-1 ○○アパート101号室"><br><p th:errors="*{profile.chou}"/>
+						
+			<label>メールアドレス：</label>
+			<input type="email" th:field="*{profile.email}" placeholder="abc@outlook.jp"><br><p th:errors="*{profile.email}"/>
+
+			<label>電話番号：</label>
+			<input type="text" th:field="*{profile.phone}" /><br><p th:errors="*{profile.phone}"/>
+			
+			<button>確認画面へ</button>
+		</form>		
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+		
+		<script>
+		document.querySelector('[data-search-btn]').addEventListener("click", function() {
+		    const zipInput = document.querySelector('[data-zipcode]');
+		    const zip = zipInput.value.replace("-", "");
+
+		    if (zip.length !== 7 || !/^\d+$/.test(zip)) {
+		        alert("正しい郵便番号を入力してください");
+		        return;
+		    }
+
+		    fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zip}`)
+		        .then(response => response.json())
+		        .then(data => {
+		            if (data.results) {
+		                const result = data.results[0];
+		                const address = result.address1 + result.address2 + result.address3;
+
+		                // Th:fieldのidが変わってもdata-addressで特定して値をセット
+		                document.querySelector('[data-address]').value = address;
+		            } else {
+		                alert("該当する住所が見つかりませんでした");
+		            }
+		        })
+		        .catch(err => {
+		            alert("住所検索中にエラーが発生しました");
+		        });
+		});
+		</script>
+
+	</body>
+</html>

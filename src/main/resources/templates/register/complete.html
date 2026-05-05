@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>新規登録｜完了画面</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>登録が完了しました！</p>
+		
+		<a th:href="@{/login}">ログイン画面へ</a>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

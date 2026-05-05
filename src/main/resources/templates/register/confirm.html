@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>新規登録｜確認画面</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>次の情報を登録します。</p>
+
+		<div th:object="${registration}">
+			<label>ユーザー名：<span th:text = "*{account.username}"/></label><br>
+			<label>パスワード：<span th:text = "${'*'.repeat(#strings.length(registration.account.password))}"/></label><br>
+			<label>郵便番号：<span th:text="'〒' + *{#strings.substring(profile.zipcode,0,3)} + '-' + *{#strings.substring(profile.zipcode,3)}"/></label><br>
+			<label>住所：<span th:text = "*{profile.address}"/></label><br>
+			<label>丁・番地・号以下：<span th:text = "*{profile.chou}"/></label><br>
+			<label>メールアドレス：<span th:text = "*{profile.email}"/></label><br>
+			<label>電話番号：<span th:text = "*{profile.phone}"/></label><br>
+		</div>
+			
+		<form th:action="@{/register/confirm}" method="post" th:object="${registration}">
+			<input type="hidden" th:field="*{account.username}">
+			<input type="hidden" th:field="*{account.password}">
+			<input type="hidden" th:field="*{profile.zipcode}">
+			<input type="hidden" th:field="*{profile.address}">
+			<input type="hidden" th:field="*{profile.chou}">
+			<input type="hidden" th:field="*{profile.email}">
+			<input type="hidden" th:field="*{profile.phone}">
+
+			<input type="submit" value="確認">
+		</form>
+
+		<form th:action="@{/register/input}" method="get">
+			<button>再入力</button>
+		</form>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

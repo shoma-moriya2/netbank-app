@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>マイページ</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p><span sec:authentication="name"></span>さんのマイページです。</p>
+		
+		<p th:text="'口座番号：' + ${bankAccount.number}"></p>
+		
+		<p th:text="'預金残高：' + ${bankAccount.deposit.toBigInteger()} + '円'"></p>
+		
+		<ul>
+			
+			<li><a th:href="@{/user/transferMoney/input}">振込・送金</a></li>
+			<li><a th:href="@{/user/log}">入出金明細</a></li>
+		
+			<li><a th:href="@{/user/profile}">個人情報</a></li>
+			<li><a th:href="@{/user/withdrawal/confirm}">退会手続き</a></li>
+		
+		</ul>
+
+		<div th:insert="~{common/logout :: logout}"></div>
+				
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

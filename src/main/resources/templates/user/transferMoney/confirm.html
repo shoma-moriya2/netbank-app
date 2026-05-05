@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>振込・送金確認ページ</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>よろしければ振り込みボタンを押してください。</p>
+		
+		<div th:object="${transferInfo}">
+			
+			<label>振込先：</label><span th:text="*{toName} + 'さん'"></span><br>
+			<label>振込金額：</label><span th:text="*{amount} + '円'"></span>
+			
+			<form th:action="@{/user/transferMoney/confirm}" method="post">
+				<input type="hidden" th:field="*{toNumber}">
+				<input type="hidden" th:field="*{amount}">
+				<button>振り込む</button>
+			</form>
+		</div>
+		
+		<hr>
+		
+		<a th:href="@{/user/transferMoney/input}">戻る</a>
+
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

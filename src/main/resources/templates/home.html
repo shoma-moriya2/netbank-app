@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>ホーム</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>ホーム画面です。</p>
+		
+		<ul>
+			<li><a th:href="@{/login}">ログイン</a></li>
+			<li><a th:href="@{/register/input}">新規登録</a></li>
+		</ul>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>個人情報</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p><span sec:authentication="name"></span>さんの個人情報です。</p>
+
+		<label>郵便番号：</label><span th:text="'〒' + ${#strings.substring(profile.zipcode,0,3)} + '-' 
+		+ ${#strings.substring(profile.zipcode,3)}"></span><br>		
+		<label>住所：</label><span th:text="${profile.address} + ${profile.chou}"></span><br>
+		<label>メールアドレス：</label><span th:text="${profile.email}"></span><br>
+		<label>電話番号：</label><span th:text="${profile.phone}"></span><br>
+		
+		<div th:insert="~{common/toUserHome :: toUserHome}"></div>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

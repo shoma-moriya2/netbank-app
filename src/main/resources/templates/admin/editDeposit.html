@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>利用者一覧</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p th:text="'預金残高：' + ${bankAccount.deposit.toBigInteger()} + '円'"></p>
+		
+		
+		
+		<form th:action="@{/admin/editDeposit}" method="post">
+			<label>残高を</label><input type="number" name="amount" min="1" required><span>円増やす。</span>
+			<input type="hidden" name="id" th:value="${bankAccount.id}">
+			<button>決定</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href="@{/admin/accounts}">戻る</a>
+		
+		
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

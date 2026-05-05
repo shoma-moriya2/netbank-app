@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>ログイン成功</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>こんにちは、<span sec:authentication="name"></span>さん。</p>
+		
+		<ul>
+			<li><a th:href="@{/user/home}">一般ユーザーページへ</a></li>
+			<li><a th:href="@{/admin/home}">管理者ページへ</a></li>
+		</ul>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

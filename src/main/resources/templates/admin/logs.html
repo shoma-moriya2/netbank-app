@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>全振り込み履歴</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>銀行のすべての振り込み履歴です。</p>
+		
+		<ul>
+			<li th:each="item : ${logsList}"><span th:text="${'（' + #temporals.format(item.time, 'yyyy年MM月dd日 HH:mm') + '）' + item.fromAccount.username + 'さんから' 
+				+ item.toAccount.username + 'さんへ' + item.amount.toBigInteger() + '円'}"></span></li>
+		</ul>
+
+		<div th:insert="~{common/toAdminHome :: toAdminHome}"></div>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>

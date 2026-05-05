@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>退会手続き</title>
+	</head>
+	<body>
+		<div th:insert="~{common/header :: header}"></div>
+		
+		<p>退会処理が完了しました。ご利用ありがとうございました。</p>
+		
+		<hr>
+		
+		<a th:href="@{/home}">トップへ</a>
+		
+		<div th:insert="~{common/footer :: footer}"></div>
+	</body>
+</html>
